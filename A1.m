@@ -1,7 +1,6 @@
 clc; clear;
 
-syms t
-
+% Create state matricies
 A = [-2, -2;
      1 ,  0];
 
@@ -13,12 +12,15 @@ C = [1, 0;
 
 D = 0;
 
+% Initial condition
 xo = [1;
       1];
 
+% Set-up time step and time vector
 dT = 0.01;
 t = 0:dT:10;
 
+% Input vector - sin(t); 0 <= t <= pi
 u = zeros(size(t));
 u(t <= pi) = sin(t(t <= pi));
 
