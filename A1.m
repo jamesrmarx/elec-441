@@ -66,3 +66,16 @@ plot(kt, x_k(2,:))
 hold on
 plot(kt, u_k)
 
+figure
+plot(t, sim_result(:,1))
+hold on
+plot(kt, x_k(1,:), '-o')
+plot(t, u)
+plot(kt, u_k, 'o')
+
+figure
+plot(t, sim_result(:,2))
+hold on
+plot(kt, x_k(2,:), '-o')
+plot(t, u)
+plot(kt, u_k, 'o')
