@@ -48,37 +48,20 @@ for k = 1:length(kt)-1
 end
 
 figure
-
-subplot(4, 1, 1)
-plot(t, sim_result(:,1))
+plot(t, sim_result(:,1), 'DisplayName', 'x_1 continuous-time')
 hold on
-plot(t, u)
+plot(kt, x_k(1,:), '-o', 'DisplayName', 'x_1 discrete-time')
+plot(t, u, 'DisplayName', 'u continuous-time')
+plot(kt, u_k, 'o', 'DisplayName', 'u discrete-time')
+legend
+xlabel("time")
 
-subplot(4, 1, 2)
-plot(t, sim_result(:,2))
-hold on
-plot(t, u)
-
-subplot(4, 1, 3)
-plot(kt, x_k(1,:))
-hold on
-plot(kt, u_k)
-
-subplot(4, 1, 4)
-plot(kt, x_k(2,:))
-hold on
-plot(kt, u_k)
 
 figure
-plot(t, sim_result(:,1))
+plot(t, sim_result(:,2), 'DisplayName', 'x_2 continuous-time')
 hold on
-plot(kt, x_k(1,:), '-o')
-plot(t, u)
-plot(kt, u_k, 'o')
-
-figure
-plot(t, sim_result(:,2))
-hold on
-plot(kt, x_k(2,:), '-o')
-plot(t, u)
-plot(kt, u_k, 'o')
+plot(kt, x_k(2,:), '-o', 'DisplayName', 'x_2 discrete-time')
+plot(t, u, 'DisplayName', 'u continuous-time')
+plot(kt, u_k, 'o', 'DisplayName', 'u discrete-time')
+legend
+xlabel("time")
