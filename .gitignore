@@ -1,1 +1,8 @@
-*.asv
+# Ignore all files
+*
+**/*
+# Unignore specific files
+!.gitignore
+!*.m
+!*.tex
+!*.pdf
