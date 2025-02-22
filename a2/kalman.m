@@ -1,4 +1,7 @@
 % <strong>kalman</strong> - Kalman Decomposition
+%   Author: James Marx
+%   Edited: 2025.02.20
+%
 %   This function returns the Kalman Decomposition of a state space model.
 %
 %   Additional computations are made in an attempt to closer match an

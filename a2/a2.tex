@@ -12,6 +12,7 @@
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{enumitem}
+\usepackage{minted}
 
 \title{ELEC 441 Assignment 2}
 \author{James Marx \\ \\ 80562549}
@@ -677,12 +678,173 @@
 
     $\boxed{\text{Since the Controllability matrix has rank 3, this system is controllable}}$
 
+    \item Observability
+     
+    \[
+    \mathcal{O} = 
+    \begin{bmatrix}
+        C \\
+        CA \\
+        \vdots \\
+        CA^{n-1}
+    \end{bmatrix}
+    \]
+
+    Pre-multiplying $A^n$ with $C$ will result in the third row of $A^n$.
+
+    \[
+    \mathcal{O} = 
+    \begin{bmatrix}
+        0 & 0 & 1 \\
+        0 & 1 & -3 \\
+        1 & -4 & 5
+    \end{bmatrix}
+    = \operatorname{rank}(\mathcal{O}) = 3
+    \]
+
+    $\boxed{\text{Since $\mathcal{O}$ has a rank of 3, the system is observable}}$
 
     \end{enumerate}
 
+    \item
+
+    \[
+    A = 
+    \begin{bmatrix}
+        0 & 1 & 0 & 0 \\
+        \frac{g(M+m)}{lm} & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 \\
+        -\frac{mg}{M} & 0 & 0 & 0 
+    \end{bmatrix}
+    , \quad B = 
+    \begin{bmatrix}
+        0 \\
+        -\frac{1}{lM} \\
+        0 \\
+        \frac{1}{M}
+    \end{bmatrix}
+    , \quad C = 
+    \begin{bmatrix}
+        0 & 0 & 1 & 0
+    \end{bmatrix}
+    \]
+
+    \begin{enumerate}[label=\roman*)]
+        \item Controllability
+
+    \[
+    A^2 = 
+    \begin{bmatrix}
+        0 & 1 & 0 & 0 \\
+        \frac{g(M+m)}{lm} & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 \\
+        -\frac{mg}{M} & 0 & 0 & 0 
+    \end{bmatrix}
+    \begin{bmatrix}
+        0 & 1 & 0 & 0 \\
+        \frac{g(M+m)}{lm} & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 \\
+        -\frac{mg}{M} & 0 & 0 & 0 
+    \end{bmatrix}
+    = 
+    \begin{bmatrix}
+        \frac{g(M+m)}{lM} & 0 & 0 & 0 \\
+        0 & \frac{g(M+m)}{lM} & 0 & 0 \\
+        -\frac{mg}{M} & 0 & 0 & 0 \\
+        0 & -\frac{mg}{M} & 0 & 0
+    \end{bmatrix}
+    \]
+
+    \[
+    A^3 = 
+    \begin{bmatrix}
+        0 & 1 & 0 & 0 \\
+        \frac{g(M+m)}{lm} & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 \\
+        -\frac{mg}{M} & 0 & 0 & 0 
+    \end{bmatrix}
+    \begin{bmatrix}
+        \frac{g(M+m)}{lM} & 0 & 0 & 0 \\
+        0 & \frac{g(M+m)}{lM} & 0 & 0 \\
+        -\frac{mg}{M} & 0 & 0 & 0 \\
+        0 & -\frac{mg}{M} & 0 & 0
+    \end{bmatrix}
+    = 
+    \begin{bmatrix}
+        0 & \frac{g(M+m)}{lM} & 0 & 0 \\
+        \left(\frac{g(M+m)}{lM}\right)^2 & 0 & 0 & 0 \\
+        0 & -\frac{mg}{M} & 0 & 0 \\
+        -\frac{mg^2(M+m)}{lM^2} & 0 & 0 & 0
+    \end{bmatrix}
+    \]
+
+    \[
+    AB = 
+    \begin{bmatrix}
+        -\frac{1}{lM} \\
+        0 \\
+        \frac{1}{M} \\
+        0 
+    \end{bmatrix}
+    \]
+
+    \[
+    A^2B = 
+    \begin{bmatrix}
+        0 \\
+        -\frac{g(M+m)}{(lM)^2} \\
+        0 \\
+        \frac{mg}{lM^2}
+    \end{bmatrix}
+    \]
+
+    \[
+    A^3B = 
+    \begin{bmatrix}
+        -\frac{g(M+m)}{(lM)^2} \\
+        0 \\
+        \frac{mg}{lM^2} \\
+        0
+    \end{bmatrix}
+    \]
+
+    \[
+    \mathcal{C} = 
+    \begin{bmatrix}
+         0 & -\frac{1}{lM} & 0 & \frac{g(M+m)}{(lM)^2} \\
+        -\frac{1}{lM} & 0 & -\frac{g(M+m)}{(lM)^2} & 0 \\
+        0 & 0 & 0 & \frac{mg}{lM^2} \\
+        \frac{1}{M} & 0 & \frac{mg}{lM^2} & 0 
+    \end{bmatrix}
+    \Rightarrow \operatorname{rank}(\mathcal{C}) = 4
+    \]
+
+    $\boxed{\text{Since $\mathcal{C}$ has a rank of 4, the system is controllable}}$
+
+
+    \item Observability
+    
+    Pre-multiplying $A^n$ with $C$ will result in the fhird row of $A^n$
+    \[
+    \mathcal{O} = 
+    \begin{bmatrix}
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1 \\
+        -\frac{mg}{M} & 0 & 0 & 0 \\
+        0 & -\frac{mg}{M} & 0 & 0
+    \end{bmatrix}
+    \Rightarrow \operatorname{rank}(\mathcal{O}) = 4
+    \]
+
+    $\boxed{\text{Since $\mathcal{O}$ has a rank of 4, the system is observable}}$
+    
+    \end{enumerate}
 \end{enumerate}
 
 \section*{P3}
+
+\begin{enumerate}[label=\alph*)]
+    \item 
 
 \[
 \left\{
@@ -918,5 +1080,357 @@ The state which is controllable and observable is $\frac{1}{2}(x_1 - x_2)$
 The state which is controllable and not observable is $\frac{1}{2}(x_1 + x_2)$
 
 No states are not controllable and observable/not observable.
+
+\item 
+
+\[
+\left\{
+    \begin{array}{l}
+        \dot x(t) = 
+        \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 1 \\
+            1 & 0 & -1 
+        \end{bmatrix}
+        x(t) + 
+        \begin{bmatrix}
+            0 \\
+            0 \\
+            1
+        \end{bmatrix}
+        u(t), \\
+        y(t) = 
+        \begin{bmatrix}
+            0 & 0 & 1
+        \end{bmatrix}
+        x(t)
+    \end{array}
+\right.
+\]
+
+We first find the controllability matrix, which will be $B$ concatonated with the thrid columns of $A^n$
+
+\[
+A^2 = 
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 1 \\
+    1 & 0 & -1 
+\end{bmatrix}
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 1 \\
+    1 & 0 & -1 
+\end{bmatrix}
+=
+\begin{bmatrix}
+    1 & 1 & 0 \\
+    1 & 1 & 0 \\
+    0 & 0 & 1 
+\end{bmatrix}
+\]
+
+\[
+\mathcal{C} = 
+\begin{bmatrix}
+    0 & 0 & 0 \\
+    0 & 1 & 0 \\
+    1 & -1 & 1
+\end{bmatrix}
+\Rightarrow \operatorname{rank}(\mathcal{C}) = 2
+\]
+
+This system is partially controllable
+
+The observability will be $C$ and the third rows of $A^n$
+
+\[
+\mathcal{O} = 
+\begin{bmatrix}
+    0 & 0 & 1 \\
+    1 & 0 & -1 \\
+    0 & 0 & 1
+\end{bmatrix}
+\Rightarrow \operatorname{rank}(\mathcal{O})= 2
+\]
+
+This system is partially observable
+
+To find the Image space of $\mathcal{C}$ we row reduce and pick two linearly independent columns
+
+\[
+\begin{bmatrix}
+    1 & -1 & 1 \\
+    0 & 1 & 0 \\
+    0 & 0 & 0
+\end{bmatrix}
+\sim
+\begin{bmatrix}
+    1 & 0 & 1 \\
+    0 & 1 & 0 \\
+    0 & 0 & 0
+\end{bmatrix}
+\]
+
+\[
+\operatorname{Im}(\mathcal{C}) = \operatorname{span}
+\left\{
+\begin{bmatrix}
+    1 \\
+    0 \\
+    0
+\end{bmatrix}
+,
+\begin{bmatrix}
+    0 \\
+    1 \\
+    0
+\end{bmatrix}
+\right\}
+\]
+
+Now for $\operatorname{Ker}(\mathcal{O})$
+
+\[
+\begin{bmatrix}
+    0 & 0 & 1 \\
+    1 & 0 & -1 \\
+    0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    x_1 \\
+    x_2 \\
+    x_3
+\end{bmatrix}
+= \mathbf{0}
+\]
+
+\begin{align*}
+    x_3 &= 0 \\
+    x_1 - x_3 &= 0 \\
+    x_2 & = \text{free}
+\end{align*}
+
+\[
+\operatorname{Ker}(\mathcal{O}) = \operatorname{span}\left\{ 
+    \begin{bmatrix}
+        0 \\
+        1 \\
+        0
+    \end{bmatrix}
+\right\}
+\]
+
+We can now begin finding the bases of the subspaces needed to construct $T^{-1}$
+
+\[
+T^{-1} = 
+\begin{bmatrix}
+    T_{c o} & T_{c \bar o} & T_{\bar c o} & T_{\bar c \bar o}
+\end{bmatrix}
+\]
+
+
+
+$T_{co}$ will be a basis for the intersection of $\operatorname{Im}(\mathcal{C})$ and the orthogonal compliment of $\operatorname{Ker}(\mathcal{O})$
+
+\[
+T_{co} = 
+\begin{bmatrix}
+    1 \\
+    0 \\
+    0
+\end{bmatrix}
+\]
+
+$T_{c \bar o}$ will be the intersection of $\operatorname{Im}(\mathcal{C})$ and $\operatorname{Ker}(\mathcal{O})$
+
+\[
+T_{c \bar o} =
+\begin{bmatrix}
+    0 \\
+    1 \\
+    0
+\end{bmatrix}
+\]
+
+$T_{\bar c o}$ will be the intersection of the orthogonal compliment of $\operatorname{Im}(\mathcal{C})$ and the orthgonal compliment of $\operatorname{Ker}(\mathcal{O})$
+
+\[
+T_{\bar c o} =
+\begin{bmatrix}
+    0 \\
+    0 \\
+    1
+\end{bmatrix}
+\]
+
+$T_{\bar c \bar o}$ will be the intersection of the orthgonal compliment of  $\operatorname{Im}(\mathcal{C})$ and $\operatorname{Ker}(\mathcal{O})$
+
+\[
+T_{\bar c \bar o} = \mathbf{0}
+\]
+
+\[
+T^{-1} = 
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix}
+\Rightarrow
+T = 
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix}
+\]
+
+After the transform, all  matricies are the same as the transform is the identity
+
+The state which is controllable and observable is $x_1$
+
+The state which is controllable and not observable is $x_2$
+
+The state which is not controllable and observable is $x_3$
+
+\end{enumerate}
+
+\noindent MATLAB Result
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{matlab_output.png}
+    \caption{MATLAB Output}
+    \label{fig:current_trans}
+\end{figure}
+
+\newpage
+
+\noindent MATLAB Code
+
+\noindent \texttt{a2.m}
+
+\begin{minted}{matlab}
+clc; clear;
+
+%%% Problem 3 %%%%
+
+% a)
+
+A = [2,-1;1,0];
+B = [1;0];
+C = [1,-1];
+
+kd_a = kalman(A,B,C);
+disp("3 a) T inverse")
+disp(kd_a.T_inv)
+disp("transformed state vector entries")
+disp("    zco   zc_o  z_co  z_c_o")
+disp(kd_a.z_dim)
+
+% b)
+
+A = [1,0,0;0,1,1;1,0,-1];
+B = [0;0;1];
+C = [0,0,1];
+
+kd_b = kalman(A,B,C);
+disp("3 b) T inverse")
+disp(kd_b.T_inv)
+disp("transformed state vector entries")
+disp("    zco   zc_o  z_co  z_c_o")
+disp(kd_b.z_dim)
+\end{minted}
+
+\noindent \texttt{kalman.m}
+
+\begin{minted}{matlab}
+% <strong>kalman</strong> - Kalman Decomposition
+%   Author: James Marx
+%   Edited: 2025.02.20
+%
+%   This function returns the Kalman Decomposition of a state space model.
+%
+%   Additional computations are made in an attempt to closer match an
+%   answer which would be computed by hand - such as keeping basis vectors
+%   positive and not defaulting to normalized vectors
+%
+%   Syntax
+%   kd = <strong>kalman</strong>(A,B,C)
+%
+%   Input Arguments
+%   <strong>A</strong> - State matrix
+%   <strong>B</strong> - Input matrix
+%   <strong>C</strong> - Output matrix
+%
+%   Output Arguments
+%   <strong>kd.A</strong> - Coordinate transformed state matrix
+%   <strong>kd.B</strong> - Coordinate transformed input matrix
+%   <strong>kd.C</strong> - Coordinate transformed output matrix
+%   <strong>kd.T_inv</strong> - Coordinate transform matrix
+%   <strong>kd.z_dim</strong> - Array for dimension of transformed state variables
+%   [zco    zc_o    z_co    z_c_o]
+%   zco   - controllable and observable
+%   zc_o  - controllable and not observable
+%   z_co  - not controllable and observable
+%   z_c_o - not controllable and not observable
+function KD = kalman(A,B,C)
+    Cb = ctrb(A,B);
+    Ob = obsv(A,C);
+
+    % find basis for Image Space of Cb
+    [R, pivot_cols] = rref(Cb);
+    basis_Im = R(:,pivot_cols);
+    basis_Im_comp = null(basis_Im');
+
+    % find basis for Kernel Space of Ob 
+    basis_Ker = null(Ob);
+    basis_Ker = normalizeOne(basis_Ker);
+    basis_Ker_comp = normalizeOne(null(basis_Ker'));
+
+    % find bases for coordinate transform matrix subspaces
+    Tc_o = intersection_basis(basis_Im, basis_Ker);
+    T_co = intersection_basis(basis_Im_comp, basis_Ker_comp);
+    T_c_o = intersection_basis(basis_Im_comp, basis_Ker);
+    Tco = intersection_basis(basis_Im, basis_Ker_comp);
+    
+    T_inv = [Tco, Tc_o, T_co, T_c_o];
+    
+    KD.A = T_inv\A*T_inv;
+    KD.B = T_inv\B;
+    KD.C = C*T_inv;
+    KD.T_inv = T_inv;
+    KD.z_dim = [size(Tco,2), size(Tc_o,2), size(T_co,2), size(T_c_o,2)];
+end
+
+% Computes a basis for the intersection of two subspaces
+function B = intersection_basis(A, B)
+    N = null([A, -B]);
+    if (~isempty(N))
+        N = normalizeOne(N);
+        B = A * N(1:size(A,2), :);
+        % Ensure the basis vectors are positive (if possible)
+        positiveBasis = B;
+        for i = 1:size(positiveBasis, 2)
+            % If the first non-zero element is negative, flip the sign of the vector
+            if any(positiveBasis(:, i) < 0)
+                positiveBasis(:, i) = -positiveBasis(:, i);
+            end
+        end
+        B = positiveBasis;
+    else
+        B = [];
+    end
+end
+
+% normalize smallest value to 1 - keeping signs
+function normA = normalizeOne(A)
+    nonZeroElements = A(A ~= 0); % Extract non-zero elements
+    smallestNonZero = min(nonZeroElements); % Find the smallest non-zero element
+    normA = A / abs(smallestNonZero);
+end
+\end{minted}
 
 \end{document}
