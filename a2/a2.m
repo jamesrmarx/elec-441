@@ -29,3 +29,11 @@ disp("    zco   zc_o  z_co  z_c_o")
 disp(kd_b.z_dim)
 
 
+%%
+
+f_clk = 192*1e6;
+psc = 4;
+arr = 54999;
+
+f = f_clk / ((psc+1)*arr)
+T = 1/f

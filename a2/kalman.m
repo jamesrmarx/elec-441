@@ -33,7 +33,7 @@ function KD = kalman(A,B,C)
 
     % find basis for Image Space of Cb
     [R, pivot_cols] = rref(Cb);
-    basis_Im = R(:,pivot_cols);
+    basis_Im = Cb(:,pivot_cols);
     basis_Im_comp = null(basis_Im');
 
     % find basis for Kernel Space of Ob 
